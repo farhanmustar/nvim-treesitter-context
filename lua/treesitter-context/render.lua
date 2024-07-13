@@ -304,11 +304,9 @@ end
 
 ---@param winid? integer
 local function win_close(winid)
-  vim.schedule(function()
-    if winid ~= nil and api.nvim_win_is_valid(winid) then
-      api.nvim_win_close(winid, true)
-    end
-  end)
+  if winid ~= nil and api.nvim_win_is_valid(winid) then
+    pcall(api.nvim_win_close, winid, true)
+  end
 end
 
 local function horizontal_scroll_contexts()
